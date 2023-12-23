@@ -1,96 +1,176 @@
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-body{ 
-  background-image:url('https://www.dropbox.com/scl/fi/i0a3r3g6820nffj647rv1/Photo-20-12-2023-6-43-28-AM-edited.jpg?rlkey=ns9azo337zwe7y5300ddd1qq9&raw=1');
-  background-repeat:no-repeat;
-  background-size:;
-}
-.container{
-  border:6px #fff solid;
-  margin-top:0px;
-}
-.everything{
-  margin-top:50px;
-  margin-left:50px;
-  background:url('https://images.unsplash.com/photo-1593485589800-579b43749b15?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aG9seSUyMGJpYmxlfGVufDB8fDB8fHww');
-  background-repeat:no-repeat;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  border:10px #222 solid;
-  position:absolute;
-  width:800px;
-}
-
-#question{
-  width:500px;
-  height:440px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-    margin-top:10px;
-  padding-top:40px;
-}
-#question h2{
-  color:white;
-  text-align:center;
-}
-.texts{
-  display:flex;
-  justify-content:center;
-     font-size:30px;
-  color:#efc232;
+const questions = [
+  {
+    question: "How many books are there in the New Teastment?",
+    answer: [
+      {text: "27", correct: true },
+      {text: "23", correct: false },
+      {text: "32", correct: false },
+      {text: "12", correct: false }
+    ]
+  },
+  {question: "His hand shall be against every man, And every man’s hand against him.(NKJV)<br><br>Who was this prophecy about?",
+    answer: [
+      {text:"David", correct: false},
+      {text: "Jacob", correct: false},
+      {text: "Joseph", correct: false },
+      {text: "Ishmael", correct: true }
+    ]
+  },
+  {question:"I go the way of all the earth; be strong, therefore, and prove  yourself a man.(NKJV)<br><br>Whose advice is this?",
+    answer: [
+      { text: "David's to Solomon", correct: true },
+      { text: "Paul's to Timothy", correct: false },
+      { text: "Eli's to Samuel", correct: false },
+      { text: "Elijah's to Elisha", correct: false}
+    ]
+  },
+  
+  {
+    question:
+      "For I say to you that God is able to raise up children to Abraham from these stones.(NKJV)<br><br>Who said this?",
+    answer: [
+      { text: "Jesus Christ", correct: true },
+      { text: "Apostle Paul", correct: false },
+      { text: "John the Baptist", correct: false },
+      { text: "Voice from Heaven", correct: false }
+    ]
+  },
+  {
+    question: "How many letters did Paul write?",
+    answer: [
+      { text: "10", correct: false },
+      { text: "13", correct: true },
+      { text: "11", correct: false },
+      { text: "12", correct: false }
+    ]
+  },
+  {
+    question: "He must increase, but I must decrease.(NKJV)<br><br>Who said this?",
+    answer: [
+      { text: "Jesus Christ", correct: false },
+      { text: "Apostle Paul", correct: false },
+      { text: "John the Baptist", correct: true },
+      { text: "Apostle Peter", correct: false }
+    ]
+  },
+  {
+    question:
+      "Yet who knows whether you have come to the kingdom for such a time as this?(NKJV)<br>Whose words are this?",
+    answer: [
+      { text: "Esther’s", correct: false },
+      { text: "Samuel’s", correct: false },
+      { text: "Mordecai’s", correct: true },
+      { text: "King Solomon’s", correct: false }
+    ]
+  },
+  {
+    question:
+      "When you till the ground, it shall no longer yield its strength to you(NKJV)<br><br>This curse was for?",
+    answer: [
+      { text: "Adam", correct: false },
+      { text: "Cain", correct: true },
+      { text: "Eve", correct: false },
+      { text: "Canaan,", correct: false }
+    ]
+  },
+  {
+    question:
+      "is the substance of things hoped for, the evidence of things not seen.(NKJV)",
+    answer: [
+      { text: "Love", correct: false },
+      { text: "Hope", correct: false },
+      { text: "Faith", correct: true },
+      { text: "Salvation", correct: false }
+    ]
+  },
+  {
+    question:
+      "If they do not hear Moses and the prophets, neither will they be persuaded though one rise from the dead(NKJV)<br><br>Which parable?",
+    answer: [
+      { text: "The lost coin", correct: false },
+      { text: "The good Samaritan", correct: false },
+      { text: "Lazarus and the rich man", correct: true },
+      { text: "The ten virgins", correct: false }
+    ]
   }
-#buttons{
-  display:flex;
-  flex-direction:column;
-  margin:20px;
-  width:90%;
+  
+];
+const questionElement = document.getElementById('ask');
+const answerElement = document.getElementById('buttons');
+const nextBtn = document.getElementById('nextbtn');
+
+let questionIndex = 0;
+let score = 0;
+function startQuiz(){
+  nextBtn.innerHTML = 'Next';
+  questionIndex = 0;
+  score = 0;
+  showQuestion();
 }
-.but{
-margin:10px;
-  color:#222;
-  background:transparent;
-  border:3px #fff solid;
-  border-radius:10px;
-  font-size:24px;
-  cursor:pointer;
-}
-.but:hover:not([disabled]){
- background: orange;
-  color: #ffff;
-  transform: scale(1.1);
-  cursor: pointer;
-}
-.but:disabled{
-  cursor:no-drop;
-}
-#nextbtn {
-  width: 150px;
-  height: 40px;
-  color: white;
-  background: transparent;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  font-size: 24px;
-  margin-bottom:20px;
-}
-#nextbtn:hover{
-  transform:scale(1.2);
+function showQuestion(){
+  resetState();
+
+    const currentQuestion = questions[questionIndex];
+  const currentIndex = questionIndex +1;
+ questionElement.innerHTML = currentIndex + ". " + currentQuestion.question;
+  
+  currentQuestion.answer.forEach((answer) =>{
+    const button = document.createElement('button');
+    button.innerHTML = answer.text;
+    button.classList.add('but')
+    answerElement.appendChild(button);
+   if(answer.correct){
+     button.dataset.correct = answer.correct
+   } button.addEventListener('click',showAnswer)
+  });
+ 
   
 }
-.texts.black{
-
+function resetState(){
+  nextBtn.style.display = 'none'
+  while(answerElement.firstChild){ answerElement.removeChild(answerElement.firstChild)
+  }
 }
-.correct{
-  background:#9aeabc;
+function showAnswer(e){
+  const selectedBtn = e.target;
+  const isCorrect = selectedBtn.dataset.correct === 'true';
+  if(isCorrect){
+ selectedBtn.classList.add('correct');
+    score++
+  }else{
+    selectedBtn.classList.add('incorrect')
+  }
+  Array.from(answerElement.children).forEach((button) => {
+    if(button.dataset.correct === 'true'){
+      button.classList.add('correct')
+    }
+    button.disabled = true
+  });
+  nextBtn.style.display = 'block';
+  if(questionIndex==9){
+    nextBtn.innerHTML = 'See score'
+  }
+    
 }
-.incorrect{
-  background:#ff9393;
+function showScore(){
+resetState()
+  questionElement.innerHTML = `You have scored ${score} out of ${questions.length}`
+  nextBtn.innerHTML = 'Try Again';
+  nextBtn.style.display = 'block';
 }
+function handleNextButton(){
+ questionIndex++
+if(questionIndex<questions.length){
+  showQuestion();
+}else{
+  showScore();
+}
+}
+nextBtn.addEventListener('click',()=>{
+if(questionIndex<questions.length){
+  handleNextButton();
+}else{
+  startQuiz();
+}
+})
+startQuiz();
